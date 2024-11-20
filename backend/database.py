@@ -1,9 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-engine = create_engine('sqlite:///database.db')
+from backend.settings import Settings
 
-def get_session():
+settings = Settings()
+
+engine = create_engine(settings.DATABASE_URL)
+
+def get_session(): # pragma: no cover
     with Session(engine) as session:
         try:
             yield session
