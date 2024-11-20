@@ -3,6 +3,9 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, EmailStr, PositiveFloat
 
 
+class Message(BaseModel):
+    message: str
+
 class ProductBase(BaseModel):
     name: str
     description: str
@@ -12,6 +15,14 @@ class ProductBase(BaseModel):
 
 class ProductCreate(ProductBase):
     pass
+
+class ProductUpdate(ProductBase):
+    name: str | None = None
+    description: str | None = None
+    price: PositiveFloat | None = None
+    category: str | None = None
+    supplier_email: EmailStr | None = None
+
 
 class ProductResponse(ProductBase):
     id: int
